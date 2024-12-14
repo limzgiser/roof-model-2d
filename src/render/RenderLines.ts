@@ -10,10 +10,10 @@ class RenderLines {
 
     private _enabled = false
 
-    private allData: any = []
+    public allData: any = []
     private drawData: any = []
 
-    private mouseMovePosition: Array<number> = []
+    private mouseMovePosition: any = undefined
 
     constructor(stage: Konva.Stage, layer: Konva.Layer) {
 
@@ -26,7 +26,7 @@ class RenderLines {
         this._layer.add(this._group)
 
 
-        this._group.zIndex(2)
+
 
     }
 
@@ -55,23 +55,23 @@ class RenderLines {
             lineCap: 'round',
             lineJoin: 'round',
             draggable: false,
-            points: lineData.flat()
+            points: lineData.map((item: any) => item.points).flat()
         });
-        line.listening(false); 
+        line.listening(false);
         this._group.add(line)
     }
 
     private onClick = (event: any) => {
 
-        if (this.mouseMovePosition.length) {
+        if (this.mouseMovePosition) {
             this.drawData.push(this.mouseMovePosition)
         }
 
         if (this.drawData.length == 2) {
-            this.allData.push(this.drawData)
+            this.allData.push(this.drawData.slice())
 
             this.renderLine(this.drawData)
-            this.drawData.length = 0
+            this.drawData = []
         }
 
 
@@ -84,11 +84,13 @@ class RenderLines {
         const shapeUnderMouse = this._stage.getIntersection(mousePos);
 
         if (shapeUnderMouse) {
-            console.log(shapeUnderMouse)
-            this.mouseMovePosition = [shapeUnderMouse.x(), shapeUnderMouse.y()]
+            this.mouseMovePosition = {
+                pid: shapeUnderMouse.getAttr('pid'),
+                points: [shapeUnderMouse.x(), shapeUnderMouse.y()]
+            }
 
         } else {
-            this.mouseMovePosition.length = 0
+            this.mouseMovePosition = undefined
         }
     }
 

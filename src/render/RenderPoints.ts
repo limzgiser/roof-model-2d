@@ -10,6 +10,8 @@ class RenderPoints {
 
     private _enabled = false
 
+    public data: any = []
+
     constructor(stage: Konva.Stage, layer: Konva.Layer) {
 
         this._stage = stage
@@ -18,7 +20,7 @@ class RenderPoints {
         this._layer = layer
 
         this._layer.add(this._group)
-        this._group.zIndex(1)
+
     }
 
     get enabled() {
@@ -49,7 +51,13 @@ class RenderPoints {
             stroke: 'black',
             strokeWidth: 2,
         });
+        let pid = Math.random().toString(36).substring(2, 9)
+        circle.setAttr('pid', pid)
 
+        this.data.push({
+            pid,
+            point: [mousePos.x, mousePos.y]
+        })
         circle.on('mouseover', () => {
             document.body.style.cursor = 'crosshair';  // 改变鼠标为移动形状
         });
