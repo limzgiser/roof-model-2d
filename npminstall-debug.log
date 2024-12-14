@@ -1,21 +1,13 @@
 {
   root: '/Users/limingzhi/Documents/学习/YG/roof_model',
   registry: 'https://registry.npmmirror.com',
-  pkgs: [
-    {
-      name: 'turf.js',
-      version: 'latest',
-      type: 'tag',
-      alias: undefined,
-      arg: [Result]
-    }
-  ],
+  pkgs: [],
   production: false,
   cacheStrict: false,
   cacheDir: '/Users/limingzhi/.npminstall_tarball',
   env: {
     npm_config_registry: 'https://registry.npmmirror.com',
-    npm_config_argv: '{"remain":[],"cooked":["--fix-bug-versions","--china","--userconfig=/Users/limingzhi/.cnpmrc","--disturl=https://cdn.npmmirror.com/binaries/node","--registry=https://registry.npmmirror.com","turf.js"],"original":["--fix-bug-versions","--china","--userconfig=/Users/limingzhi/.cnpmrc","--disturl=https://cdn.npmmirror.com/binaries/node","--registry=https://registry.npmmirror.com","turf.js"]}',
+    npm_config_argv: '{"remain":[],"cooked":["--fix-bug-versions","--china","--userconfig=/Users/limingzhi/.cnpmrc","--disturl=https://cdn.npmmirror.com/binaries/node","--registry=https://registry.npmmirror.com"],"original":["--fix-bug-versions","--china","--userconfig=/Users/limingzhi/.cnpmrc","--disturl=https://cdn.npmmirror.com/binaries/node","--registry=https://registry.npmmirror.com"]}',
     npm_config_user_agent: 'npminstall/7.12.0 npm/? node/v16.20.2 darwin x64',
     npm_config_cache: '/Users/limingzhi/.npminstall_tarball',
     NODE: '/usr/local/bin/node',

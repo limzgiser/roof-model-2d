@@ -26,10 +26,10 @@ function renderArea(pointsList: any, areaIdList: any, group: Konva.Group) {
             let line = new Konva.Line({
                 points: _points.flat(),
                 fill: getRandomHexColor(),
-                stroke: 'black',
+                stroke: '#f00',
                 strokeWidth: 2,
                 closed: true,
-                opacity: 0.5
+                opacity: 0.2
             })
             group.add(line)
         }

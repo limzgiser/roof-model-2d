@@ -1,3 +1,10 @@
+
+import * as turf from '@turf/turf'
+import { booleanContains } from "@turf/boolean-contains";
+
+import { booleanCrosses } from "@turf/boolean-crosses";
+import { booleanWithin } from "@turf/boolean-within";
+
 // 计算点集合的凸包
 function convexHull(points: any) {
     // 1. 按照 x, y 排序
@@ -43,52 +50,76 @@ function convexHull(points: any) {
 
 const filterArea = (areaPoitsList: any, pointsList: any, linesList: any) => {
 
-    let result = []
+    let result: any = []
 
-    const lineCroxPolygon = (areaPoint: any) => {
 
-        // var line1 = turf.lineString([
-        //     [-2, 2],
-        //     [4, 2],
-        //   ]);
-        //   var line2 = turf.lineString([
-        //     [1, 1],
-        //     [1, 2],
-        //     [1, 3],
-        //     [1, 4],
-        //   ]);
-          
+    // var line1 = turf.lineString([
+    //     [-2, 2],
+    //     [4, 2],
+    //   ]);
+    //   var line2 = turf.lineString([
+    //     [1, 1],
+    //     [1, 2],
+    //     [1, 3],
+    //     [1, 4],
+    //   ]);
+
+
+    let areapoints = areaPoitsList.map((item: any) => item.map((id: any) => pointsList.find((a: any) => a.pid == id).point))
+
+    areapoints.forEach((areaPoints: any) => {
+        let points = [...areaPoints, areaPoints[0]]
+        var polygon: any = turf.polygon([points]);
+
+        let win = false
         for (let i = 0; i < linesList.length; i++) {
             const element = linesList[i];
 
- 
-            
-        }
+            let lip = element.map((item: any) => item.point)
 
-        return false
-    }
+            let pp: any = turf.point([
+                (lip[0][0] + lip[1][0]) / 2,
+                (lip[0][1] + lip[1][1]) / 2,
+            ])
 
-    for (let i = 0; i < areaPoitsList.length; i++) {
-        const areaPoint = areaPoitsList[i];
 
-        if (!areaPoint || areaPoint.length < 3) {
-            console.warn("分割结果存在节点数小于3的情况")
-            continue
-        }
+            var withIn = booleanWithin(pp, polygon);
 
-        let points: any = []
-        areaPoint.forEach((id: any) => {
-            let point = pointsList.find((item: any) => item.pid == id)
-            if (point) {
-                points.push(point.point)
+            if (withIn) {
+                win = true
+                break
             }
-        });
 
-        if (lineCroxPolygon(points)) {
-            continue
         }
-        result.push(areaPoint)
-    }
+
+        if (!win) {
+            result.push(areaPoints)
+        }
+    });
+
+    return result
+
+    // for (let i = 0; i < areaPoitsList.length; i++) {
+    //     const areaPoint = areaPoitsList[i];
+
+    //     if (!areaPoint || areaPoint.length < 3) {
+    //         console.warn("分割结果存在节点数小于3的情况")
+    //         continue
+    //     }
+
+    //     let points: any = []
+    //     areaPoint.forEach((id: any) => {
+    //         let point = pointsList.find((item: any) => item.pid == id)
+    //         if (point) {
+    //             points.push(point.point)
+    //         }
+    //     });
+
+    //     if (lineCroxPolygon(points)) {
+    //         continue
+    //     }
+    //     result.push(areaPoint)
+    // }
 
     return result
 }

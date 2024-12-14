@@ -55,7 +55,7 @@ class RenderLines {
             lineCap: 'round',
             lineJoin: 'round',
             draggable: false,
-            points: lineData.map((item: any) => item.points).flat()
+            points: lineData.map((item: any) => item.point).flat()
         });
         line.listening(false);
         this._group.add(line)
@@ -86,7 +86,7 @@ class RenderLines {
         if (shapeUnderMouse) {
             this.mouseMovePosition = {
                 pid: shapeUnderMouse.getAttr('pid'),
-                points: [shapeUnderMouse.x(), shapeUnderMouse.y()]
+                point: [shapeUnderMouse.x(), shapeUnderMouse.y()]
             }
 
         } else {

@@ -87,11 +87,11 @@ const generageArea = () => {
 
   console.log(result);
 
-  let area = result.filter((item: any) => item.length == 3);
+  // let area = result.filter((item: any) => item.length == 3);
 
   filterArea(result, points, allData);
 
-  console.log("三角面", area);
+  console.log("三角面", result);
 
   const border: any = points.map((item: any) => item.point);
 
@@ -105,7 +105,7 @@ const generageArea = () => {
   let group = new Konva.Group();
 
   layer.add(group);
-  renderArea(points, area, group);
+  renderArea(points, result, group);
 
   // let line = new Konva.Line({
   //   points: hull.flat(),
