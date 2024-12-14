@@ -18,7 +18,7 @@ class RenderPoints {
         this._layer = layer
 
         this._layer.add(this._group)
-
+        this._group.zIndex(1)
     }
 
     get enabled() {
@@ -44,7 +44,7 @@ class RenderPoints {
         const circle = new Konva.Circle({
             x: mousePos.x,
             y: mousePos.y,
-            radius: 5,
+            radius: 8,
             fill: 'red',
             stroke: 'black',
             strokeWidth: 2,

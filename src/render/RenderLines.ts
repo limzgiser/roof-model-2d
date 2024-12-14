@@ -20,9 +20,13 @@ class RenderLines {
         this._stage = stage
         this._group = new Konva.Group()
 
+
         this._layer = layer
 
         this._layer.add(this._group)
+
+
+        this._group.zIndex(2)
 
     }
 
@@ -50,9 +54,10 @@ class RenderLines {
             strokeWidth: 2,
             lineCap: 'round',
             lineJoin: 'round',
+            draggable: false,
             points: lineData.flat()
         });
-
+        line.listening(false); 
         this._group.add(line)
     }
 
@@ -61,13 +66,14 @@ class RenderLines {
         if (this.mouseMovePosition.length) {
             this.drawData.push(this.mouseMovePosition)
         }
-         
+
         if (this.drawData.length == 2) {
             this.allData.push(this.drawData)
 
             this.renderLine(this.drawData)
             this.drawData.length = 0
         }
+
 
     }
 
