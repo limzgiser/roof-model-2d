@@ -85,13 +85,12 @@ const generageArea = () => {
 
   const result = graph.removeDuplicateArrays(cycles);
 
-  console.log(result);
-
   // let area = result.filter((item: any) => item.length == 3);
 
-  filterArea(result, points, allData);
+  let trangleList = filterArea(result, points, allData);
 
-  console.log("三角面", result);
+  console.log("三角面", trangleList);
+  console.log("顶点数据", points);
 
   const border: any = points.map((item: any) => item.point);
 
@@ -102,10 +101,11 @@ const generageArea = () => {
 
   console.log("Convex Hull:", hull);
 
+  console.log("屋顶边界", hull);
   let group = new Konva.Group();
 
   layer.add(group);
-  renderArea(points, result, group);
+  renderArea(points, trangleList, group);
 
   // let line = new Konva.Line({
   //   points: hull.flat(),

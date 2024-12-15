@@ -53,21 +53,10 @@ const filterArea = (areaPoitsList: any, pointsList: any, linesList: any) => {
     let result: any = []
 
 
-    // var line1 = turf.lineString([
-    //     [-2, 2],
-    //     [4, 2],
-    //   ]);
-    //   var line2 = turf.lineString([
-    //     [1, 1],
-    //     [1, 2],
-    //     [1, 3],
-    //     [1, 4],
-    //   ]);
-
 
     let areapoints = areaPoitsList.map((item: any) => item.map((id: any) => pointsList.find((a: any) => a.pid == id).point))
 
-    areapoints.forEach((areaPoints: any) => {
+    areapoints.forEach((areaPoints: any, index: number) => {
         let points = [...areaPoints, areaPoints[0]]
         var polygon: any = turf.polygon([points]);
 
@@ -93,7 +82,7 @@ const filterArea = (areaPoitsList: any, pointsList: any, linesList: any) => {
         }
 
         if (!win) {
-            result.push(areaPoints)
+            result.push(areaPoitsList[index])
         }
     });
 
